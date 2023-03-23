@@ -1,12 +1,13 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+const favicon = require("serve-favicon");
+// console.log("Filename", path.basename(__filename));
+// console.log("Dirname", path.dirname(__filename));
+// console.log("Extension", path.extname(__filename));
+// console.log("Path object", path.parse(__filename).dir);
+// console.log("New path", path.join(__dirname, "view", "favicon.ico"));
 
-console.log("Filename", path.basename(__filename));
-console.log("Dirname", path.dirname(__filename));
-console.log("Extension", path.extname(__filename));
-console.log("Path object", path.parse(__filename).dir);
-console.log("New path", path.join(__dirname, "view", "favicon.ico"));
 app.get("/", function (req, res) {
   res.send("ОК принят");
 });
