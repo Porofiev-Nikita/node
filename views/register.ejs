@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> </title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+</head>
+<body>
+    <%- include ('menu') %>
+    <h1><%= title %> </h1>
+    <p>Заполните форму ниже чтобы зарегистрироваться</p>
+    <% include ('messages') %> 
+    <div class="container">
+        <form action="/register" method="post">
+            <div class="mb-3 row">
+                <label for="inputName" class="col-4 col-form-label">Имя пользователя</label>
+                <div class="col-8">
+                    <input type="text" class="form-control" name="user[name]" id="inputName" placeholder="Username">
+                </div>
+            </div>
+            
+            <div class="mb-3 row">
+                <label for="inputPass" class="col-4 col-form-label">Пароль</label>
+                <div class="col-8">
+                    <input type="password" class="form-control" name="user[pass]" id="inputPass" placeholder="password">
+                </div>
+            </div>
+            
+            <div class="mb-3 row">
+                <div class="offset-sm-4 col-sm-8">
+                    <button type="submit" value="SignUp" class="btn btn-primary">Регистрация</button>
+                </div>
+            </div>
+        </form>
+     </div>
+
+
+</body>
+</html>

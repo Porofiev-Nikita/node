@@ -2,13 +2,32 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const favicon = require("serve-favicon");
+const cookieParser=require("cookie-parser");
+const bodyParser = require("body-parser");
+const methodOverride = require("method-override");
+const entries = require("./routes/entries");
 
-app.get("/", function (req, res) {
-  res.send("ОК принят");
-});
-app.get("/denis", function (req, res) {
-  res.send("ОК denis принято");
-});
+app.set("view", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+app.use(express.static(path.join(__dirname)));
+app.use ('/css/bootstrap.css','node_modules/bootstrap/dist/css/bootstrap.css');
+app.use(methodOverride())
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser);
+
+app.get("/", entries.list);
+app.get("/post", entries.form);
+
+app.get('/register',register.form)
+app.post('/register',register.submit)
+
+app.get('/login',login.form)
+app.get('/login',login.logout)
+app.post('/login',login.submit)
+
+
 
 //Обработка ошибок
 
