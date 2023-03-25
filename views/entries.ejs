@@ -9,15 +9,15 @@
 </head>
 <body>
     <div class="container">
-<%- include ('menu') %>
-<%- include ('messages') %>
+<%- include ('/partials/menu') %>
+<!-- <%- include ('/partials/messages') %> -->
 <% entries.forEach((entry)=>{ %>
     <div class="card entry" style="width: 66rem;">
         <div class="card-body ">
           <h5 class="card-title"><%= entry.title %></h5>
         
         <p class="card-text">
-            <%= entry.body %> 
+            <%= entry.content %> 
         </p>
     </br>
     <h6>Запостил :   <%= entry.username %> </h6>
