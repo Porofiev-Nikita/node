@@ -21,7 +21,7 @@ app.use(
 app.use(methodOverride());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser);
+// app.use(cookieParser);
 
 //вывод листа записей при обращении в корень
 app.get("/", entries.list);
