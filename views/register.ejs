@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="/css/bootstrap.css">
 </head>
 <body>
-    <%- include ('/partials/menu') %>
+    <%- include ('./partials/menu') %>
     <h1><%= title %> </h1>
     <p>Заполните форму ниже чтобы зарегистрироваться</p>
-    <!-- <% include ('/partials/messages') %>  -->
+    <%# include ('/partials/messages') %> 
     <div class="container">
         <form action="/register" method="post">
             <div class="mb-3 row">
@@ -24,7 +24,7 @@
             <div class="mb-3 row">
                 <label for="inputPass" class="col-4 col-form-label">Пароль</label>
                 <div class="col-8">
-                    <input type="password" class="form-control" name="user[pass]" id="inputPass" placeholder="password">
+                    <input type="password" class="form-control" name="user[password]" id="inputPass" placeholder="password">
                 </div>
             </div>
             

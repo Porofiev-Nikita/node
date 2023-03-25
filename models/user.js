@@ -12,7 +12,7 @@ class User {
   constructor() {}
   //запись в базу юзера
   static create(data, cb) {
-    const sql = "INSERT INTO users (name, password) VALUE (?,?,?)";
+    const sql = "INSERT INTO users (name, password) VALUES ( ?, ?)";
     const saltRounds = 10;
     bcrypt.genSalt(saltRounds, (err, salt) => {
       if (err) return next(err);
@@ -21,8 +21,8 @@ class User {
         if (err) return next(err);
         // Store hash in your password DB.
         db.serialize(() => {
-          db.run(sql, data.name, hash);
-          db.get("SELECT name FROM users WHERE name=?", data.name, cb);
+          db.run(sql, data.name, hash, cb);
+          // db.get("SELECT name FROM users WHERE name=?", data.name, cb); // или id? и serialize убрать
         });
       });
     });
@@ -30,15 +30,15 @@ class User {
 
   //поиск юзера в базе
   static findByName(username, cb) {
-    db.get("SELECT * FROM user WHERE name=?", username,cb);
+    db.get("SELECT * FROM users WHERE name=?", username, cb);
   }
   //проверка аутентификации
-  static authentificate(name, pass, cb) {
+  static authentificate(name, password, cb) {
     User.findByName(name, (err, user) => {
       if (err) return cb(err);
       if (!user) return cb();
       //взято из описания npm пакета
-      bcrypt.compare(pass, user.pass, (err, result) => {
+      bcrypt.compare(password, user.password, (err, result) => {
         if (result) return cb(null, user);
         cb();
       });

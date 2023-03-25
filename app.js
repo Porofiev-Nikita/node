@@ -7,10 +7,10 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const entries = require("./routes/entries");
 const register = require("./routes/register");
-const login = require("./routes/login");
+// const login = require("./routes/login");
 
 app.set("port", 3000);
-app.set("view", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.use(express.static(path.join(__dirname)));

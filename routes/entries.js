@@ -3,6 +3,7 @@ const Entry = require("../models/entry");
 exports.list = function (req, res,next) {
   Entry.selectAll((err, entries) => {
     if (err) return next(err);
+console.log(entries);
     res.render("entries", { title: "Entries", entries: entries });
   });
 };

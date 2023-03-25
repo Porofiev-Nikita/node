@@ -14,7 +14,7 @@ class Entry {
 
   //запись
   static create(data, cb) {
-    const sql = "INSERT INTO entries (username, title, content) VALUE (?,?,?)";
+    const sql = "INSERT INTO entries (username, title, content) VALUES (?,?,?)";
     db.run(sql, data.username, data.title, data.content, cb);
   }
 }

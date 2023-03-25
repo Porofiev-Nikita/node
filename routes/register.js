@@ -10,11 +10,11 @@ exports.submit = (req, res, next) => {
     if (user) {
       res.error("Такой пользователь в базе уже есть");
       res.redirect("/");
+    } else {
+      User.create(data, (err) => {
+        if (err) return next(err); //доработать запись в session.uname
+        res.redirect("/");
+      });
     }
-    User.create(data, (err) => {
-      if (err) return next(err); //доработать запись в session.uname
-
-      res.redirect("/");
-    });
   });
 };
