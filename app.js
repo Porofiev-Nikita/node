@@ -1,10 +1,11 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+// const session = require("express-session");
 const favicon = require("serve-favicon");
-const cookieParser = require("cookie-parser");
+// const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
-const methodOverride = require("method-override");
+// const methodOverride = require("method-override");
 const entries = require("./routes/entries");
 const register = require("./routes/register");
 // const login = require("./routes/login");
@@ -18,15 +19,18 @@ app.use(
   "/css/bootstrap.css",
   express.static("node_modules/bootstrap/dist/css/bootstrap.css")
 );
-app.use(methodOverride());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(cookieParser);
+// app.use(methodOverride());
+// app.use(cookieParser());
+// app.use(session({secret: "secret1", resave:false, saveUninitialized:true}));
 
 //вывод листа записей при обращении в корень
 app.get("/", entries.list);
 //вывод формы для заполнения записей
 app.get("/post", entries.form);
+//прием данных по форме создания поста
+// app.post("/post", f1, f2, f3, entries.submit);
 //вывод формы регистрации
 app.get("/register", register.form);
 //прием данных по форме регистрации

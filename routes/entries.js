@@ -1,9 +1,9 @@
 const Entry = require("../models/entry");
 
-exports.list = function (req, res,next) {
+exports.list = function (req, res, next) {
   Entry.selectAll((err, entries) => {
     if (err) return next(err);
-console.log(entries);
+    console.log(entries);
     res.render("entries", { title: "Entries", entries: entries });
   });
 };
@@ -19,11 +19,11 @@ exports.submit = (req, res, next) => {
   const entry = {
     username: username,
     title: data.title,
-    body: data.body,
+    content: data.content,
   };
 
-  Entry.create(entry, (err)=>{
+  Entry.create(entry, (err) => {
     if (err) return next(err);
-    res.redirect('/')
+    res.redirect("/");
   });
 };
