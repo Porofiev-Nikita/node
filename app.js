@@ -1,14 +1,15 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-// const session = require("express-session");
+const session = require("express-session");
 const favicon = require("serve-favicon");
-// const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
-// const methodOverride = require("method-override");
+// const bodyParser = require("body-parser");
 const entries = require("./routes/entries");
 const register = require("./routes/register");
-// const login = require("./routes/login");
+const login = require("./routes/login");
+const messages = require("./middleware/messages");
+const users = require("./middleware/users");
+const validate = require("./middleware/validate");
 
 app.set("port", 3000);
 app.set("views", path.join(__dirname, "views"));
@@ -19,28 +20,28 @@ app.use(
   "/css/bootstrap.css",
   express.static("node_modules/bootstrap/dist/css/bootstrap.css")
 );
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(methodOverride());
-// app.use(cookieParser());
-// app.use(session({secret: "secret1", resave:false, saveUninitialized:true}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(session({secret: "secret1", resave:false, saveUninitialized:true}));
+app.use(messages)
+app.use(users)
 
 //вывод листа записей при обращении в корень
 app.get("/", entries.list);
 //вывод формы для заполнения записей
 app.get("/post", entries.form);
 //прием данных по форме создания поста
-// app.post("/post", f1, f2, f3, entries.submit);
+app.post("/post", validate.required ('entry[title]'),validate.lengthAbove('entry[title]',4),entries.submit);
 //вывод формы регистрации
 app.get("/register", register.form);
 //прием данных по форме регистрации
 app.post("/register", register.submit);
 //вывод формы для логина
-// app.get("/login", login.form);
+app.get("/login", login.form);
 //осуществление выхода
-// app.get("/login", login.logout);
+app.get("/logout", login.logout);
 //прием данных по форме логина
-// app.post("/login", login.submit);
+app.post("/login", login.submit);
 
 //Обработка ошибок
 

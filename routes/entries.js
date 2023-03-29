@@ -3,7 +3,7 @@ const Entry = require("../models/entry");
 exports.list = function (req, res, next) {
   Entry.selectAll((err, entries) => {
     if (err) return next(err);
-    console.log(entries);
+    // console.log(entries);
     res.render("entries", { title: "Entries", entries: entries });
   });
 };
@@ -14,8 +14,9 @@ exports.form = (req, res) => {
 
 exports.submit = (req, res, next) => {
   const data = req.body.entry;
-  const user = req.body.user;
+  const user = req.user;
   const username = user ? user.name : null;
+  console.log(username, req.body, req.user);
   const entry = {
     username: username,
     title: data.title,

@@ -30,7 +30,7 @@ class User {
 
   //поиск юзера в базе
   static findByName(username, cb) {
-    db.get("SELECT * FROM users WHERE name=?", username, cb);
+    db.get("SELECT * FROM users WHERE name = ?", username, cb);
   }
   //проверка аутентификации
   static authentificate(name, password, cb) {
